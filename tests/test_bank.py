@@ -45,4 +45,28 @@ def test_cannot_modify_accounts_set(bank):
 
 
 # TODO: Add unit tests for bank.add_funds()
+def test_add_funds(bank: Bank):
+    bank.create_account('test')
+    account: Account = bank.get_account('test')
 
+    bank.add_funds('test', 999)
+
+    assert len(bank.transactions) == 1
+
+    txn = bank.transactions[0]
+    assert txn.amount == 999
+    assert txn.account.name == 'test'
+
+
+# TODO: Add unit tests for bank.add_funds()
+def test_add_funds(bank: Bank):
+    bank.create_account('Matt')
+    
+    with pytest.raises(Exception):
+        # This operation should raise an exception
+        bank.add_funds('Matt', 'Matt2')
+    assert len(bank.transactions) == 0
+
+
+
+    

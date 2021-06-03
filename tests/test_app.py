@@ -2,6 +2,7 @@
 import pytest
 
 from bank_api.app import app
+from flask import Response
 
 
 @pytest.fixture
@@ -15,4 +16,15 @@ def test_account_creation(client):
     # client.post(...)
     # client.get(...)
     # https://flask.palletsprojects.com/en/1.1.x/testing/
-    pass
+    
+    #pass
+
+    
+    url = '/accounts/foo'
+    post_result: Response = client.post(url)
+    assert post_result.status_code == 200
+
+    get_result: Response = client.get(url)
+    assert get_result.status_code == 200
+
+
